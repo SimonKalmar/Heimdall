@@ -1,7 +1,32 @@
-doctype html
+doctype
 html
   head
     title= title
+    meta(charset='utf-8')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="icon", type="image/svg+xml", href="/favicon.svg")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(type="module", src='/javascripts/nquery.js')
   body
-    block content
+    header
+      h2= title
+      nav
+        ul
+          li
+            a(href="/") Home
+          if user
+            li
+              a(href="/dashboard") Insiders
+            li
+              a(href="/users/logout") Logout
+          if !user
+            li
+              a(href="/users/register") Register
+            li
+              a(href="/users/login") Login
+    main
+      block content
+    footer
+        div(id="cpy")
+        div
+          a(href="#") twitter
