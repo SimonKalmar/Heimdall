@@ -7,7 +7,7 @@ const saltRounds = 10;
 
 exports.register = function (req, res) {
     res.render('register', {
-            title: 'Demoing PassportJS',
+            title: 'Heimdall - Register',
             subtitle: 'Inspired by Traversy'
     });
 };
@@ -24,8 +24,8 @@ exports.postRegister = function (req, res) {
         errors.push({ msg: 'Passwords do not match' });
     }
 
-    if (password.length < 12) {
-        errors.push({ msg: 'Password must be at least 12 characters' });
+    if (password.length < 8) {
+        errors.push({ msg: 'Password must be at least 8 characters' });
     }
 
     if (errors.length > 0) {
@@ -75,7 +75,7 @@ exports.postRegister = function (req, res) {
 
 exports.login = function (req, res) {
     res.render('login', {
-        title: 'Demoing PassportJS',
+        title: 'Heimdall - Login',
         subtitle: 'Inspired by Traversy'
     });
 };

@@ -1,5 +1,33 @@
 extends layout
 
 block content
-  h1= subtitle
-  p Welcome to #{title}
+  if response
+    div.backgroundAround
+      div#test
+
+        div.flexybox
+          div
+            b.title #{response.Title} (#{response.Year})
+            br
+            span with #{response.Actors}.
+            br
+            br
+            | #{response.Plot}
+            br
+            br
+            b Released &nbsp;
+            | #{response.Released}
+            br
+            b Runtime &nbsp;
+            | #{response.Runtime}
+            br
+            b Genre &nbsp;
+            | #{response.Genre}
+          img(src=`${response.Poster}`).posterpic
+  form(action='/test' method='get')
+    label(for='movieName') Movie:
+    br
+    input#movieName(type='text' name='mname')
+    br
+    br
+    input(type='submit' value='Submit')

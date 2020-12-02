@@ -6,14 +6,14 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="icon", type="image/svg+xml", href="/favicon.svg")
     link(rel='stylesheet', href='/stylesheets/style.css')
-    script(type="module", src='/javascripts/nquery.js')
+
   body
-    header
-      h2= title
+    header.menubar
+      a(href="/")
+        img(src="/images/logo_sideways.svg")
+
       nav
         ul
-          li
-            a(href="/") Home
           if user
             li
               a(href="/dashboard") Insiders
@@ -24,6 +24,9 @@ html
               a(href="/users/register") Register
             li
               a(href="/users/login") Login
+            li
+              form(action='/test' method='get')
+                input#movieName(type='text' name='mname')
     main
       block content
     footer
