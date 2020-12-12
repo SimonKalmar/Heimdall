@@ -20,6 +20,7 @@ body {
   padding: 0px;
   margin: 0px;
   background: #000;
+  color: #fff;
 }
 
 a {
@@ -107,7 +108,8 @@ div#test {
 
 .backgroundAround {
   background: url(../images/stoney.jpg);
-  background-position: fixed;
-  background-size: cover;
+  background-attachment: fixed;
+  background-size: 100%;
+  background-repeat: no-repeat;
   padding: 30px;
 }

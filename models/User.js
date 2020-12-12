@@ -18,7 +18,19 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  image: {
+    type: String,
+  },
+  anonymous: {
+    type: Boolean,
+    default: false
+  },
+  rewied: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const User = mongoose.model('User', UserSchema, 'user');

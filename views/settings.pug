@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .settingsOuter
+    .settingInner
+      .settingsMenu
+        div Change Profile Picture
+        div Change Email
+        div Change Password
+        div Privacy Settings
+        div Something Else
+      .settingsbox
+        h2 Profile picture
+        form(action='/profilepic' method='post' enctype="multipart/form-data")
+          label(for='myfile') Select a file:
+          br
+          input#myfile(type='file' name='image')
+          br
+          .buttonright
+            button(type='submit' name='button') Confirm

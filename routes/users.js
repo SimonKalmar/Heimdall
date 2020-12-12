@@ -4,7 +4,6 @@ const auth = require("../controllers/authController.js");
 const { forwardAuthenticated } = require('../config/auth');
 
 
-
 router.get('/register', forwardAuthenticated, auth.register);
 router.post('/register', auth.postRegister);
 

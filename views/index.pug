@@ -23,11 +23,61 @@ block content
             br
             b Genre &nbsp;
             | #{response.Genre}
+            each ratings in response.Ratings
+              - var rating = ratings.Value.replace('%', '');
+              br
+              b #{ratings.Source} &nbsp;
+              | #{rating}
+
           img(src=`${response.Poster}`).posterpic
+  if user
+    .writingReview
+      h1 Enter your review for&nbsp;
+        span(style="color: #5cb79d") #{response.Title} (#{response.Year})
+      form(action='/reviewsend' method='POST' enctype="multipart/form-data")
+        .writingReviewInner
+          label(for="reviewTitle") Give your review a title
+          br
+          input(type="text" name="reviewTitle")
+          br
+          br
+          .scorebox
+            input(type="radio" id="score1" name="score" value="1")
+            label(for='score1') One
+            input(type="radio" id="score2" name="score" value="2")
+            label(for='score2') Two
+            input(type="radio" id="score3" name="score" value="3")
+            label(for='score3') Three
+            input(type="radio" id="score4" name="score" value="4")
+            label(for='score4') Four
+            input(type="radio" id="score5" name="score" value="5")
+            label(for='score5') Five
+          textarea(name='text' rows='8' cols='80' placeholder='Whats on your mind?' maxlength="167"  required=true)
+          br
+          input#postAno(type='checkbox' name='anonymousPost' value='true')
+          label(for='anonymousPost') Post anonymously
+        .postReview
+          input(type="hidden" name="name" value=`${response.Title}`)
+          input(type="hidden" name="poster" value=`${response.Poster}`)
+          input(type="hidden" name="year" value=`${response.Year}`)
+          input(type="hidden" name="type" value=`${response.Type}`)
+          button(type='submit' name='button') Submit review
+          br
+          br
+
+
+
   form(action='/test' method='get')
     label(for='movieName') Movie:
     br
     input#movieName(type='text' name='mname')
+    br
+    br
+    input(type='submit' value='Submit')
+  form(action='/search' method='get')
+    label(for='movieName') Movie:
+    br
+    input#movieName(type='text' name='ask')
     br
     br
     input(type='submit' value='Submit')
