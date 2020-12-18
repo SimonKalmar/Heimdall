@@ -3,18 +3,48 @@ extends layout
 block content
   .settingsOuter
     .settingInner
-      .settingsMenu
-        div Change Profile Picture
-        div Change Email
-        div Change Password
-        div Privacy Settings
-        div Something Else
       .settingsbox
-        h2 Profile picture
+        h2 Change Profile Picture
         form(action='/profilepic' method='post' enctype="multipart/form-data")
           label(for='myfile') Select a file:
           br
           input#myfile(type='file' name='image')
+          br
+          .buttonright
+            button(type='submit' name='button') Confirm
+
+      .settingsbox
+        h2 Change Email
+        form(action='/email' method='post')
+          label(for='oldemail') Write your current email:
+          br
+          input#myfile(type='email' name='oldemail' required)
+          br
+          label(for='newemail') Write your new email:
+          br
+          input#myfile(type='email' name='newemail' required)
+          br
+          label(for='confirmemail') Confirm your new email:
+          br
+          input#myfile(type='email' name='confirmemail' required)
+          br
+          .buttonright
+            button(type='submit' name='button') Confirm
+
+      .settingsbox
+        h2 Change Password
+        form(action='/password' method='post')
+          label(for='opassword') Write your current password:
+          br
+          input#myfile(type='password' name='opassword' required)
+          br
+          label(for='npassword') Write your new password:
+          br
+          input#myfile(type='password' name='npassword' required)
+          br
+          label(for='cpassword') Confirm your new password:
+          br
+          input#myfile(type='password' name='cpassword' required)
           br
           .buttonright
             button(type='submit' name='button') Confirm

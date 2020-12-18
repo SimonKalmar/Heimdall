@@ -6,30 +6,38 @@ html
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel="icon", type="image/svg+xml", href="/favicon.svg")
     link(rel='stylesheet', href='/stylesheets/style.css')
-
+    script(src='https://kit.fontawesome.com/190d6066e4.js' crossorigin='anonymous')
+    script(src='/javascripts/stars.js')
   body
     header.menubar
       a(href="/")
-        img(src="/images/logo_sideways.svg")
+        img(src="/images/logo_white_side.svg")
 
       nav
         ul
           if user
             li
-              a(href="/dashboard") Insiders
+              a(href="/settings")
+                | Settings &nbsp;
+                i.fas.fa-cog
+
             li
-              a(href="/users/logout") Logout
+              a(href="/users/logout")
+                | Sign out &nbsp;
+                i.fas.fa-sign-out-alt
           if !user
             li
-              a(href="/users/register") Register
+              a(href="/users/register")
+                | Register &nbsp;
+                i.fas.fa-plus-circle
             li
-              a(href="/users/login") Login
-            li
-              form(action='/search' method='get')
-                input#movieName(type='text' name='ask')
+              a(href="/users/login")
+                | Login &nbsp;
+                i.fas.fa-sign-in-alt
+    .searchbar
+      form(action='/search' method='get')
+        input#movieName(type='text' name='ask' placeholder='Search for your favourite movie...')
+        input(type='submit' value='Search')
     main
       block content
     footer
-        div(id="cpy")
-        div
-          a(href="#") twitter

@@ -12,12 +12,9 @@ block content
               div.flexybox
                 div
                   b.title
-                    a(href=`/${response.Type}/${response.imdbID}`) #{response.Title} (#{response.Year}) #{response.Type}
-                img(src=`${response.Poster}`).posterpic
-  form(action='/search' method='get')
-    label(for='movieName') Movie:
-    br
-    input#movieName(type='text' name='ask')
-    br
-    br
-    input(type='submit' value='Submit')
+                    a(href=`/${response.Type}/${response.imdbID}`) #{response.Title} (#{response.Year})
+                  br
+                  span Click the title to view more information about this movie.
+                img(src=`${response.Poster}`).posterpicsearch
+            br
+            br

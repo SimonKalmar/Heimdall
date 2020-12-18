@@ -1,29 +1,11 @@
 extends layout
 
 block content
-  .headerfront
-    .headerinside
-      h1 Welcome to Heimdall
-      p
-        br
-        | The place, where you will be able to write and read reviews for some of your favourite movies in the world. The Norse god, Heimdall, is known for his great vision and with that he will be showing you the world of movies. This way you will be able to learn lots of information about the movies that you are interested in.
-        br
-        br
-        | You will be able to see scores from Heimdall's users, IMDB, Rotten Tomatoes and Metacritic, so you know if a movie is what you might consider watching in the near future.
-        br
-        br
-        | To read reviews, you don't have to have an account, but to write them, you will be needing to make an account, where you will be able to customize the profile picture that you have in order to show other users who you are.
-        br
-        br
-      .buttonStyle
-        a(href='users/register') Sign up
 
   if (latestReviews)
     .latestReviews
       .latestReviewBox
-        h2 Latest Reviews
-          span.seemore
-            a(href="/allreviews") See all reviews
+        h2 Latest Reviews&nbsp;
         if(!latestReviews.length)
           .singularPreview
             .singularInfo
@@ -101,6 +83,7 @@ block content
                       if latest.reviewer == reviewer.name
                         if reviewer.image != undefined
                           img(src=`https://res.cloudinary.com/simonkalmar/c_fill,w_70,h_70,g_face/v1608121436/${reviewer.image}`)
+
                 .singularInfo
                   h3 #{latest.reviewTitle}&nbsp;
                   | Review for&nbsp;
@@ -109,9 +92,8 @@ block content
                   if latest.ano
                     | Anonymous User - #{latest.dateFormatted}
                   else
-                    for reviewer in users
-                      if latest.reviewer == reviewer.name
-                        | #{reviewer.name} - #{latest.dateFormatted}
+                    | #{latest.reviewer} - #{latest.dateFormatted}
+                  br
                   .stars
                     if (latest.score == 1)
                       i(class="fas fa-star" style="color: #5CB79D")
@@ -143,7 +125,9 @@ block content
                       i(class="fas fa-star" style="color: #5CB79D")
                       i(class="fas fa-star" style="color: #5CB79D")
                       i(class="fas fa-star" style="color: #5CB79D")
+
                   p #{latest.text}
+
                 .box
                   img(src=`${latest.poster}`)
                 br

@@ -1,29 +1,125 @@
 extends layout
 
 block content
-  .headerfront
-    .headerinside
-      h1 Welcome to Heimdall
-      p
-        br
-        | The place, where you will be able to write and read reviews for some of your favourite movies in the world. The Norse god, Heimdall, is known for his great vision and with that he will be showing you the world of movies. This way you will be able to learn lots of information about the movies that you are interested in.
-        br
-        br
-        | You will be able to see scores from Heimdall's users, IMDB, Rotten Tomatoes and Metacritic, so you know if a movie is what you might consider watching in the near future.
-        br
-        br
-        | To read reviews, you don't have to have an account, but to write them, you will be needing to make an account, where you will be able to customize the profile picture that you have in order to show other users who you are.
-        br
-        br
-      .buttonStyle
-        a(href='users/register') Sign up
+  if response
+    div.backgroundAround
+      div#test
+
+        div.flexybox
+          img(src=`${response.Poster}`).posterpic
+          .infobox
+            div
+              b.title #{response.Title} (#{response.Year})
+              br
+              span with #{response.Actors}.
+              br
+              br
+              | #{response.Plot}
+              br
+              br
+              b Released&nbsp;
+              | #{response.Released}
+              br
+              b Runtime&nbsp;
+              | #{response.Runtime}
+              br
+              b Genre&nbsp;
+              | #{response.Genre}
+              br
+              b Director&nbsp;
+              | #{response.Director}
+              br
+              b Writer&nbsp;
+              | #{response.Writer}
+              br
+              b Languages&nbsp;
+              | #{response.Language}
+              br
+              b Country&nbsp;
+              | #{response.Country}
+            .ratingsflex
+              each ratings in response.Ratings
+                - var rating = ratings.Value.replace('%', '');
+                div
+                  b #{ratings.Source}&nbsp;
+                  | #{rating}
+                  br
+              div
+                b User reviews&nbsp;
+                if average
+                  | #{average}/5 (#{latestReviews.length} reviews)
+                else
+                  | Currently no user reviews
+
+  if user
+    .writingReviewOuter
+      .writingReviewOutIn
+        h2 Enter your review
+        h3 For #{response.Title}
+        .writingReview
+          form(action='/reviewsend' method='POST')
+            .writingReviewInner
+              label(for="reviewTitle") Give your review a title
+              br
+              input(type="text" name="reviewTitle")
+              br
+              br
+              .ano
+                div
+                  input#favourite(type='checkbox' name='favourite' value='true')
+                  label(for='anonymousPost') Is this one of your favourites?
+                div
+                  input#postAno(type='checkbox' name='anonymousPost' value='true')
+                  label(for='anonymousPost') Post anonymously
+              textarea(name='text' rows='8' cols='80' placeholder='What are your thoughts?' required=true)
+              br
+              .scorebox
+                input(type="radio" id="score1" name="score" value="5")
+                label(for='score1')
+                  i.fas.fa-star
+                input(type="radio" id="score2" name="score" value="4")
+                label(for='score2')
+                  i.fas.fa-star
+                input(type="radio" id="score3" name="score" value="3")
+                label(for='score3')
+                  i.fas.fa-star
+                input(type="radio" id="score4" name="score" value="2")
+                label(for='score4')
+                  i.fas.fa-star
+                input(type="radio" id="score5" name="score" value="1")
+                label(for='score5')
+                  i.fas.fa-star
+                br
+                br
+            .postReview
+              input(type="hidden" name="name" value=`${response.Title}`)
+              input(type="hidden" name="poster" value=`${response.Poster}`)
+              input(type="hidden" name="year" value=`${response.Year}`)
+              input(type="hidden" name="type" value=`${response.Type}`)
+              input(type="hidden" name="reviewer" value=`${user.name}`)
+              input(type="hidden" name="imdbID" value=`${response.imdbID}`)
+              .buttonStyle
+                button(type='submit' name='button') Submit review
+  else
+    .writingReviewOuter
+      .writingReviewOutIn
+        h2 Login to submit a review
+        .writingReview
+          .writingReviewInner In order to submit a review, you will need to have an account on Heimdall.
+            br
+            | Please sign in&nbsp;
+            a(href="/users/login") here
+            br
+            | Or create an account&nbsp;
+            a(href="/users/register") here
+
 
   if (latestReviews)
     .latestReviews
       .latestReviewBox
         h2 Latest Reviews
           span.seemore
-            a(href="/allreviews") See all reviews
+            a(href=`/${response.imdbID}/allreviews`) See all reviews
         if(!latestReviews.length)
           .singularPreview
             .singularInfo
@@ -112,6 +208,7 @@ block content
                     for reviewer in users
                       if latest.reviewer == reviewer.name
                         | #{reviewer.name} - #{latest.dateFormatted}
+                  br
                   .stars
                     if (latest.score == 1)
                       i(class="fas fa-star" style="color: #5CB79D")

@@ -43,6 +43,19 @@ const ReviewSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
       default: false
+    },
+    reviewer: {
+      type: String,
+      required: true,
+    },
+    imdbID: {
+      type: String,
+      required: true
+    },
+    favourite: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
   { timestamps: true }

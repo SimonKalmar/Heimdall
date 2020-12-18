@@ -1,5 +1,148 @@
 extends layout
 
 block content
-  h1= subtitle
-  p Welcome to #{user.name}
+  .headerfront
+    .headerinside
+      h1 Welcome #{user.name}
+      p
+        br
+        | By searching for different movies, you will be able figure out different information about them and learn what other users have gotten out of these movies. There are several reviews written by the site's users, which will be at your disposal.
+        br
+        br
+        | You will be able write your own reviews on the site and share your thoughts about them with like minded people, who care a lot about movies.
+
+
+  if (latestReviews)
+    .latestReviews
+      .latestReviewBox
+        h2 Latest Reviews&nbsp;
+          span.seemore
+            a(href="/allreviews") See all reviews
+        if(!latestReviews.length)
+          .singularPreview
+            .singularInfo
+              p There are currently no reviews
+        else
+          for latest in latestReviews
+            if latest.favourite
+              .singularPreview.favourite
+                .profilepic
+                  if latest.ano
+                    img(src=`https://res.cloudinary.com/simonkalmar/c_thumb,w_70,g_face/v1608121436/heimdall/default`)
+                  else
+                    for reviewer in users
+                      if latest.reviewer == reviewer.name
+                        if reviewer.image != undefined
+                          img(src=`https://res.cloudinary.com/simonkalmar/c_fill,w_70,h_70,g_face/v1608121436/${reviewer.image}`)
+
+                .singularInfo
+                  h3 #{latest.reviewTitle}&nbsp;
+                  | Review for&nbsp;
+                  a(href=`/movie/${latest.imdbID}`) #{latest.name} (#{latest.year})
+                  | &nbsp;written by&nbsp;
+                  if latest.ano
+                    | Anonymous User - #{latest.dateFormatted}
+                  else
+                    | #{latest.reviewer} - #{latest.dateFormatted}
+                  br
+                  .stars
+                    if (latest.score == 1)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 2)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 3)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 4)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 5)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      if latest.favourite
+                    i(style="font-size: 12px; color: #749488") &nbsp;- A FAVOURITE
+                  p #{latest.text}
+
+                .box
+                  img(src=`${latest.poster}`)
+                br
+                br
+
+            else
+              .singularPreview
+                .profilepic
+                  if latest.ano
+                    img(src=`https://res.cloudinary.com/simonkalmar/c_thumb,w_70,g_face/v1608121436/heimdall/default`)
+                  else
+                    for reviewer in users
+                      if latest.reviewer == reviewer.name
+                        if reviewer.image != undefined
+                          img(src=`https://res.cloudinary.com/simonkalmar/c_fill,w_70,h_70,g_face/v1608121436/${reviewer.image}`)
+
+                .singularInfo
+                  h3 #{latest.reviewTitle}&nbsp;
+                  | Review for&nbsp;
+                  a(href=`/movie/${latest.imdbID}`) #{latest.name} (#{latest.year})
+                  | &nbsp;written by&nbsp;
+                  if latest.ano
+                    | Anonymous User - #{latest.dateFormatted}
+                  else
+                    for reviewer in users
+                      if latest.reviewer == reviewer.name
+                        | #{reviewer.name} - #{latest.dateFormatted}
+                  br
+                  .stars
+                    if (latest.score == 1)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 2)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 3)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 4)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #31474B")
+                    else if (latest.score == 5)
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+                      i(class="fas fa-star" style="color: #5CB79D")
+
+                  p #{latest.text}
+
+                .box
+                  img(src=`${latest.poster}`)
+                br
+                br

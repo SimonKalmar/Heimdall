@@ -19,9 +19,14 @@ router.get('/search', idx.search);
 
 router.get('/movie/:id', idx.moviepage);
 
+router.get('/allreviews', idx.allreviews);
+router.get('/:id/allreviews', idx.allreviewsmovie);
+
 router.get('/settings', ensureAuthenticated, idx.settings);
 
 router.post('/profilepic', ensureAuthenticated, upload, apiCon.profilePic);
+router.post('/email', ensureAuthenticated, apiCon.email);
+router.post('/password', ensureAuthenticated, apiCon.password);
 
 router.post('/reviewsend', ensureAuthenticated, apiCon.createReview);
 

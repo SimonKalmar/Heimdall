@@ -1,17 +1,17 @@
 const cloudinary = require("cloudinary").v2;
 const path = require("path");
-const Datauri = require("datauri");
+const Datauri = require('datauri/parser');
 
 cloudinary.config({
-  cloud_name: "dfhjofqok",
+  cloud_name: "simonkalmar",
   api_key: "326382768643178",
   api_secret: "HB_HI4gbJ7UZznYGXDfdXPX9Mzk",
 });
 
 module.exports.upload = async (req) => {
-  const dUri = new Datauri();
+  let dUri = new Datauri();
 
-  let file = dUri.format(
+  let file = await dUri.format(
     path.extname(req.file.originalname).toString(),
     req.file.buffer
   );

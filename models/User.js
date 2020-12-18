@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "heimdall/default"
   },
   anonymous: {
     type: Boolean,
@@ -29,7 +30,7 @@ const UserSchema = new mongoose.Schema({
   rewied: [
     {
       type: String,
-    },
+    }
   ],
 });
 
