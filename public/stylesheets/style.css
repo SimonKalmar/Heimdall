@@ -639,3 +639,156 @@ input[name=reviewTitle] {
 .settingsbox {
   padding-bottom: 20px;
 }
+
+.profilebox {
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 140px;
+}
+
+.profilebox .profileinfo {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profilebox .profileinfo div {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  justify-content: center;
+  padding: 5px;
+  border: 3px solid #333;
+  text-align: center;
+}
+
+.profilebox .createdOn {
+  margin-bottom: 20px;
+}
+
+.profilebox .profileinfo div b {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.profilebox .profileinfo div span {
+  text-transform: uppercase;
+  color: #5CB79D;
+  font-family: "Norse Bold";
+  font-size: 30px;
+}
+
+.profilebox h3 {
+  color: #5CB79D;
+  font-family: "Norse Bold";
+  font-size: 64px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.profileReviewsSection {
+  background: #31474B;
+  padding-right: 20px;
+  color: #333;
+}
+
+.profileReviewsSectionBox {
+  width: 60%;
+  max-width: 1150px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar {
+  width: 40%;
+}
+
+.profileReviews .latestReviewBox {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.profileReviews .latestReviews {
+  color: #333;
+  padding: 0px;
+}
+
+.profileReviews .latestReviews h2 {
+  color: #5CB79D;
+  font-family: "Norse Bold";
+  font-size: 44px;
+  text-shadow: 3px 3px 3px #333
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.sidebar .favouritesbox {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.profileReviews .singularInfo p {
+font-size: 14px;
+}
+
+.profileReviews .singularInfo h3 {
+font-size: 25px;
+padding: 0px;
+}
+
+.profileReviews .singularPreview {
+  padding: 20px;
+}
+
+.sidebar .favouritesbar {
+  background: #31474B;
+  color: #333;
+  margin-top: 30px;
+  margin-right: 20px;
+}
+
+.sidebar .favouritesbar h2 {
+  color: #5CB79D;
+  font-family: "Norse Bold";
+  font-size: 44px;
+  text-shadow: 3px 3px 3px #333
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.chosenfaves {
+  background: #F1F3ED;
+  margin: 0 auto;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.chosenpic {
+  width: 20px;
+}
+
+.chosenfaves img {
+  max-width: 100%;
+  box-shadow: 3px 3px 10px #000;
+  border-radius: 10px;
+}
+
+.chosenfaves a {
+  max-width: 30%;
+  margin-right: 1.5%;
+  margin-left: 1.5%;
+  margin-bottom: 3px;
+}

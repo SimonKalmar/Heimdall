@@ -1,0 +1,258 @@
+extends layout
+
+block content
+  if content
+    div.backgroundAround
+      div#test(style="margin-top:50px;")
+
+        div.flexybox
+          .profilePic(style="position: relative;")
+            if content[0].image != undefined
+              img(src=`https://res.cloudinary.com/simonkalmar/c_fill,w_200,h_200,g_face/v1608121436/${content[0].image}` style="border-radius: 30px 0px 0px 30px;border: 5px solid #333; position: absolute; top: -70px;")
+          .profilePic(style="width: 260px;")
+          .profilebox
+            div.profileinfo
+              div(style="border-right: 0px;")
+                b Number of reviews
+                span #{reviewcount.length}
+              div(style="border-right: 0px;")
+                b Average of all scores
+                span #{averagescore}
+              div(style="border-right: 0px;")
+                b Number of favourites
+                span #{favourites.length}
+              div(style="border-radius: 0px 10px 10px 0px;")
+                b Member since
+                span #{date}
+            h3 #{content[0].name}
+
+  .profileReviewsSection
+    .profileReviewsSectionBox
+      .sidebar
+        .favouritesbar
+          .favouritesbox
+            h2 Favourites
+            .chosenfaves
+              if(favourites.length == 0)
+                p There are currently no favourites
+              else
+                for faves in reviews
+                  if faves.favourite
+                    a(href=`/movie/${faves.imdbID}`)
+                      img(src=`${faves.poster}`)
+
+      .profileReviews
+        if (reviews)
+          .latestReviews
+            .latestReviewBox
+              h2 Latest Reviews&nbsp;
+                span.seemore
+                  a(href=`/profile/${content[0]._id}/allreviews`) See all reviews
+              if(!reviews.length)
+                .singularPreview
+                  .singularInfo
+                    p There are currently no reviews
+              else
+                for latest in reviews
+                  if !latest.ano
+                    if latest.favourite
+                      .singularPreview.favourite
+                        .singularInfo
+                          h3 #{latest.reviewTitle}&nbsp;
+                          | Review for&nbsp;
+                          a(href=`/movie/${latest.imdbID}`) #{latest.name} (#{latest.year})
+                          if latest.ano
+                            | Anonymous User - #{latest.dateFormatted}
+                          else
+                            for reviewer in content
+                              if latest.reviewer == reviewer.name
+                                | &nbsp;- #{latest.dateFormatted}
+                          br
+                          .stars
+                            if (latest.score == 1)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 2)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 3)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 4)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 5)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              if latest.favourite
+                            i(style="font-size: 12px; color: #749488") &nbsp;- A FAVOURITE
+                          p #{latest.text}
+
+                        .box
+                          img(src=`${latest.poster}`)
+                        br
+                        br
+
+                    else
+                      .singularPreview
+                        .singularInfo
+                          h3 #{latest.reviewTitle}&nbsp;
+                          | Review for&nbsp;
+                          a(href=`/movie/${latest.imdbID}`) #{latest.name} (#{latest.year})
+                          if latest.ano
+                            | Anonymous User - #{latest.dateFormatted}
+                          else
+                            for reviewer in content
+                              if latest.reviewer == reviewer.name
+                                | &nbsp;- #{latest.dateFormatted}
+                          br
+                          .stars
+                            if (latest.score == 1)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 2)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 3)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 4)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 5)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+
+                          p #{latest.text}
+
+                        .box
+                          img(src=`${latest.poster}`)
+                        br
+                        br
+
+
+                  else if (latest.reviewer = user)
+                    if latest.favourite
+                      .singularPreview.favourite
+                        .singularInfo
+                          h3 #{latest.reviewTitle}&nbsp;
+                          | Review for&nbsp;
+                          a(href=`/movie/${latest.imdbID}`) #{latest.name} (#{latest.year})
+                          | &nbsp;- #{latest.dateFormatted}
+                          br
+                          .stars
+                            if (latest.score == 1)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 2)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 3)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 4)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 5)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                            if latest.favourite
+                              i(style="font-size: 12px; color: #749488") &nbsp;- A FAVOURITE
+                        p #{latest.text}
+
+                        .box
+                          img(src=`${latest.poster}`)
+                        br
+                        br
+
+                    else
+                      .singularPreview
+                        .singularInfo
+                          h3 #{latest.reviewTitle}&nbsp;
+                          | Review for&nbsp;
+                          a(href=`/movie/${latest.imdbID}`) #{latest.name} (#{latest.year})
+                          | &nbsp;- #{latest.dateFormatted}
+                          br
+                          .stars
+                            if (latest.score == 1)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 2)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 3)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 4)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #31474B")
+                            else if (latest.score == 5)
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+                              i(class="fas fa-star" style="color: #5CB79D")
+
+                          p #{latest.text}
+
+                        .box
+                          img(src=`${latest.poster}`)
+                        br
+                        br

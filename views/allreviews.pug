@@ -31,7 +31,10 @@ block content
                   if latest.ano
                     | Anonymous User - #{latest.dateFormatted}
                   else
-                    | #{latest.reviewer} - #{latest.dateFormatted}
+                    for reviewer in users
+                      if latest.reviewer == reviewer.name
+                        a(href=`/profile/${reviewer._id}`) #{reviewer.name}
+                        | &nbsp;- #{latest.dateFormatted}
                   br
                   .stars
                     if (latest.score == 1)
@@ -92,7 +95,10 @@ block content
                   if latest.ano
                     | Anonymous User - #{latest.dateFormatted}
                   else
-                    | #{latest.reviewer} - #{latest.dateFormatted}
+                    for reviewer in users
+                      if latest.reviewer == reviewer.name
+                        a(href=`/profile/${reviewer._id}`) #{reviewer.name}
+                        | &nbsp;- #{latest.dateFormatted}
                   br
                   .stars
                     if (latest.score == 1)

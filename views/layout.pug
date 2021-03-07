@@ -17,6 +17,10 @@ html
         ul
           if user
             li
+              a(href=`/profile/${user._id}`)
+                | Profile &nbsp;
+                i.fas.fa-user
+            li
               a(href="/settings")
                 | Settings &nbsp;
                 i.fas.fa-cog

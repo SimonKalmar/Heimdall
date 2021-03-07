@@ -52,54 +52,56 @@ block content
                   | Currently no user reviews
 
   if user
-    .writingReviewOuter
-      .writingReviewOutIn
-        h2 Enter your review
-        h3 For #{response.Title}
-        .writingReview
-          form(action='/reviewsend' method='POST')
-            .writingReviewInner
-              label(for="reviewTitle") Give your review a title
-              br
-              input(type="text" name="reviewTitle")
-              br
-              br
-              .ano
-                div
-                  input#favourite(type='checkbox' name='favourite' value='true')
-                  label(for='anonymousPost') Is this one of your favourites?
-                div
-                  input#postAno(type='checkbox' name='anonymousPost' value='true')
-                  label(for='anonymousPost') Post anonymously
-              textarea(name='text' rows='8' cols='80' placeholder='What are your thoughts?' required=true)
-              br
-              .scorebox
-                input(type="radio" id="score1" name="score" value="5")
-                label(for='score1')
-                  i.fas.fa-star
-                input(type="radio" id="score2" name="score" value="4")
-                label(for='score2')
-                  i.fas.fa-star
-                input(type="radio" id="score3" name="score" value="3")
-                label(for='score3')
-                  i.fas.fa-star
-                input(type="radio" id="score4" name="score" value="2")
-                label(for='score4')
-                  i.fas.fa-star
-                input(type="radio" id="score5" name="score" value="1")
-                label(for='score5')
-                  i.fas.fa-star
+    if alreadyReviewed
+    else
+      .writingReviewOuter
+        .writingReviewOutIn
+          h2 Enter your review
+          h3 For #{response.Title}
+          .writingReview
+            form(action='/reviewsend' method='POST')
+              .writingReviewInner
+                label(for="reviewTitle") Give your review a title
+                br
+                input(type="text" name="reviewTitle")
                 br
                 br
-            .postReview
-              input(type="hidden" name="name" value=`${response.Title}`)
-              input(type="hidden" name="poster" value=`${response.Poster}`)
-              input(type="hidden" name="year" value=`${response.Year}`)
-              input(type="hidden" name="type" value=`${response.Type}`)
-              input(type="hidden" name="reviewer" value=`${user.name}`)
-              input(type="hidden" name="imdbID" value=`${response.imdbID}`)
-              .buttonStyle
-                button(type='submit' name='button') Submit review
+                .ano
+                  div
+                    input#favourite(type='checkbox' name='favourite' value='true')
+                    label(for='anonymousPost') Is this one of your favourites?
+                  div
+                    input#postAno(type='checkbox' name='anonymousPost' value='true')
+                    label(for='anonymousPost') Post anonymously
+                textarea(name='text' rows='8' cols='80' placeholder='What are your thoughts?' required=true)
+                br
+                .scorebox
+                  input(type="radio" id="score1" name="score" value="5")
+                  label(for='score1')
+                    i.fas.fa-star
+                  input(type="radio" id="score2" name="score" value="4")
+                  label(for='score2')
+                    i.fas.fa-star
+                  input(type="radio" id="score3" name="score" value="3")
+                  label(for='score3')
+                    i.fas.fa-star
+                  input(type="radio" id="score4" name="score" value="2")
+                  label(for='score4')
+                    i.fas.fa-star
+                  input(type="radio" id="score5" name="score" value="1")
+                  label(for='score5')
+                    i.fas.fa-star
+                  br
+                  br
+              .postReview
+                input(type="hidden" name="name" value=`${response.Title}`)
+                input(type="hidden" name="poster" value=`${response.Poster}`)
+                input(type="hidden" name="year" value=`${response.Year}`)
+                input(type="hidden" name="type" value=`${response.Type}`)
+                input(type="hidden" name="reviewer" value=`${user.name}`)
+                input(type="hidden" name="imdbID" value=`${response.imdbID}`)
+                .buttonStyle
+                  button(type='submit' name='button') Submit review
   else
     .writingReviewOuter
       .writingReviewOutIn
@@ -145,7 +147,10 @@ block content
                   if latest.ano
                     | Anonymous User - #{latest.dateFormatted}
                   else
-                    | #{latest.reviewer} - #{latest.dateFormatted}
+                  for reviewer in users
+                    if latest.reviewer == reviewer.name
+                      a(href=`/profile/${reviewer._id}`) #{reviewer.name}
+                      | &nbsp;- #{latest.dateFormatted}
                   br
                   .stars
                     if (latest.score == 1)
@@ -207,7 +212,8 @@ block content
                   else
                     for reviewer in users
                       if latest.reviewer == reviewer.name
-                        | #{reviewer.name} - #{latest.dateFormatted}
+                        a(href=`/profile/${reviewer._id}`) #{reviewer.name}
+                        | &nbsp;- #{latest.dateFormatted}
                   br
                   .stars
                     if (latest.score == 1)

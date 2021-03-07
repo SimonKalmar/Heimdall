@@ -21,6 +21,8 @@ router.get('/movie/:id', idx.moviepage);
 
 router.get('/allreviews', idx.allreviews);
 router.get('/:id/allreviews', idx.allreviewsmovie);
+router.get('/profile/:id/allreviews', idx.allreviewsuser);
+router.get('/profile/:id', idx.profile);
 
 router.get('/settings', ensureAuthenticated, idx.settings);
 
